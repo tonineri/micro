@@ -9,6 +9,7 @@ apt-get clean
 find /container/ -mindepth 1 \
     ! -name 'env' \
     ! -name 'cleanup.sh' \
+    ! -name 'build.sh' \
     -exec rm -rf {} +
 
 # Remove temporary files

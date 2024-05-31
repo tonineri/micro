@@ -13,10 +13,8 @@ COPY container /container
 RUN find /container -type f -name "*.sh" -exec chmod +x {} \;
 
 # Build
-RUN /container/prerequirements.sh && \
-    /container/services.sh && \
-    /container/packages.sh && \
-    /container/cleanup.sh && \
-    rm -f /container/cleanup.sh
-    
+SHELL ["/bin/bash", "-c"]
+RUN /container/build.sh \
+    && rm -f /container/build.sh
+
 CMD ["/sbin/minit"]
