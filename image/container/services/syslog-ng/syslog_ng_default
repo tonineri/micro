@@ -1,0 +1,10 @@
+# If a variable is not set here, the corresponding parameter will not be changed.
+# If a variable is set, every invocation of syslog-ng's init script will use them.
+
+# Log level of messages that should go to console
+# See syslog(3) for details
+# Uncomment and set to desired log level
+# CONSOLE_LOG_LEVEL=1
+
+# Command line options to syslog-ng
+SYSLOGNG_OPTS="--no-caps"

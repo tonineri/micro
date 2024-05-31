@@ -22,11 +22,6 @@ if [ "${DISABLE_SYSLOG:-1}" -eq 0 ]; then
   /container/services/syslog-ng/syslog-ng.sh
 fi
 
-# Install SSH server if not disabled
-if [ "${DISABLE_SSH:-1}" -eq 0 ]; then
-  /container/services/sshd/sshd.sh
-fi
-
 # Install cron daemon if not disabled
 if [ "${DISABLE_CRON:-1}" -eq 0 ]; then
   /container/services/cron/cron.sh

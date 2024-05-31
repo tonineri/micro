@@ -1,0 +1,43 @@
+#!/bin/bash
+set -e
+
+# Remove /dev/log and /var/lib/syslog-ng/syslog-ng.ctl if they are not sockets
+[ ! -S /dev/log ] && rm -f /dev/log
+[ ! -S /var/lib/syslog-ng/syslog-ng.ctl ] && rm -f /var/lib/syslog-ng/syslog-ng.ctl
+
+# Determine output mode on /dev/stdout
+if [ -p /dev/stdout ]; then
+  sed -i 's/##SYSLOG_OUTPUT_MODE_DEV_STDOUT##/pipe/' /etc/syslog-ng/syslog-ng.conf
+else
+  sed -i 's/##SYSLOG_OUTPUT_MODE_DEV_STDOUT##/file/' /etc/syslog-ng/syslog-ng.conf
+fi
+
+# Ensure /var/log is owned by root and has the correct permissions
+chown root:root /var/log
+chmod 0755 /var/log
+
+PIDFILE="/var/run/syslog-ng.pid"
+SYSLOGNG_OPTS=""
+
+# Source additional options from /etc/default/syslog-ng if available
+[ -r /etc/default/syslog-ng ] && source /etc/default/syslog-ng
+
+# Function to wait for syslog-ng to start
+syslogng_wait() {
+    if [ "$2" -ne 0 ]; then
+        return 1
+    fi
+
+    for i in $(seq 1 30); do
+        if ! syslog-ng-ctl stats > /dev/null 2>&1; then
+            return 0
+        fi
+        sleep 1s
+    done
+
+    return 1
+}
+
+# Start syslog-ng in the background and wait for it to initialize
+/usr/sbin/syslog-ng --pidfile "$PIDFILE" -F $SYSLOGNG_OPTS &
+syslogng_wait 1 $?

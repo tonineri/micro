@@ -230,10 +230,6 @@ def wait_for_runit_services():
         time.sleep(0.1)
         shutdown_runit_services(True)
 
-def install_insecure_key():
-    log("Installing insecure SSH key for user root", 'info')
-    run_command_killable("/usr/sbin/enable_insecure_key")
-
 def main(args):
     import_envvars(False, False)
     export_envvars()
@@ -283,7 +279,6 @@ def main(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Initialize the system.')
     parser.add_argument('main_command', metavar='MAIN_COMMAND', type=str, nargs='*', help='The main command to run. (default: runit)')
-    parser.add_argument('--enable-insecure-key', action='store_true', help='Install the insecure SSH key')
     parser.add_argument('--skip-startup-files', action='store_true', help='Skip running /etc/minit.d/* and /etc/rc.local')
     parser.add_argument('--skip-runit', action='store_true', help='Do not run runit services')
     parser.add_argument('--no-kill-all-on-exit', dest='kill_all_on_exit', action='store_false', help='Don\'t kill all processes on the system upon exiting')
