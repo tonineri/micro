@@ -1,10 +1,10 @@
 # Micro
 
-![micro](./design/logo.png)
+![micro](/.design/logo.png)
 
 Micro is a minimalist and optimized Docker base image built on `Ubuntu 24.04`. It is designed to be lightweight and efficient, providing a solid foundation for building your own containerized applications.
 
-![Divider](./design/divider.png)
+![Divider](/.design/divider.png)
 
 ## Features
 
@@ -14,7 +14,7 @@ Micro is a minimalist and optimized Docker base image built on `Ubuntu 24.04`. I
 - Includes `syslog-ng` daemon for logging
 - Configured with secure defaults
 
-![Divider](./design/divider.png)
+![Divider](/.design/divider.png)
 
 ## Getting Started
 
@@ -25,7 +25,7 @@ FROM antonioneri/micro:latest
 # Add your application setup here
 ```
 
-![Divider](./design/divider.png)
+![Divider](/.design/divider.png)
 
 ## Environment Variables
 
@@ -38,13 +38,13 @@ ENV LANGUAGE="en_US:en"
 ENV LC_ALL="en_US.UTF-8"
 ```
 
-![Divider](./design/divider.png)
+![Divider](/.design/divider.png)
 
 ## Logging
 
 Micro uses `syslog-ng` for logging. The configuration is optimized for Docker environments, ensuring logs are properly managed and rotated.
 
-![Divider](./design/divider.png)
+![Divider](/.design/divider.png)
 
 ### Syslog-ng Configuration
 
@@ -74,7 +74,7 @@ destination d_syslog { file("/var/log/syslog"); };
 log { source(s_src); destination(d_syslog); };
 ```
 
-![Divider](./design/divider.png)
+![Divider](/.design/divider.png)
 
 ### Logrotate Configuration
 
@@ -94,22 +94,22 @@ create
 include /etc/logrotate.d
 ```
 
-![Divider](./design/divider.png)
+![Divider](/.design/divider.png)
 
 ## Contributing
 
 Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
 
-![Divider](./design/divider.png)
+![Divider](/.design/divider.png)
 
 ## License
 
 Micro is licensed under the MIT License. See [LICENSE](LICENSE) for more information.
 
-![Divider](./design/divider.png)
+![Divider](/.design/divider.png)
 
 ## Acknowledgments
 
 This project was inspired by various minimal base images and optimized Docker practices. Special thanks to the contributors of the open-source tools and libraries used in this project.
 
-![Divider](./design/divider.png)
+![Divider](/.design/divider.png)
