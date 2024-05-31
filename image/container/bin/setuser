@@ -1,0 +1,44 @@
+#!/usr/bin/python3
+import sys
+import os
+import pwd
+
+def abort(message):
+    sys.stderr.write(f"setuser: {message}\n")
+    sys.exit(1)
+
+def main():
+    """
+    Run a command as a specified user.
+    
+    This script sets the user ID and group ID to those of the specified user,
+    updates relevant environment variables, and then executes the given command
+    as that user.
+    """
+    if len(sys.argv) < 3:
+        sys.stderr.write("Usage: /sbin/setuser USERNAME COMMAND [args...]\n")
+        sys.exit(1)
+
+    username = sys.argv[1]
+    try:
+        user = pwd.getpwnam(username)
+    except KeyError:
+        abort(f"user {username} not found")
+
+    os.initgroups(username, user.pw_gid)
+    os.setgid(user.pw_gid)
+    os.setuid(user.pw_uid)
+
+    os.environ.update({
+        'USER': username,
+        'HOME': user.pw_dir,
+        'UID': str(user.pw_uid)
+    })
+
+    try:
+        os.execvp(sys.argv[2], sys.argv[2:])
+    except OSError as e:
+        abort(f"cannot execute {sys.argv[2]}: {e}")
+
+if __name__ == '__main__':
+    main()

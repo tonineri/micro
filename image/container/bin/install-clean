@@ -1,0 +1,19 @@
+#!/bin/bash
+set -euxo pipefail
+
+ARGS="$*"
+NO_RECOMMENDS="--no-install-recommends"
+RECOMMENDS="--install-recommends"
+
+if [[ "$ARGS" == *"$RECOMMENDS"* ]]; then
+    NO_RECOMMENDS=""
+    ARGS="${ARGS//$RECOMMENDS/}"
+fi
+
+echo "Installing $ARGS"
+
+apt-get -q update
+apt-get -qy install $NO_RECOMMENDS $ARGS
+apt-get -qy autoremove
+apt-get clean
+rm -rf /var/lib/apt/lists/*
