@@ -10,11 +10,11 @@ Micro is a minimalist and optimized Docker base image built on `Ubuntu 24.04`. I
 
 ## Features
 
-- Based on Ubuntu 24.04
-- Minimalist design with essential tools and utilities
-- Optimized for performance and size
-- Includes `syslog-ng` daemon for logging
-- Configured with secure defaults
+- Based on **Ubuntu 24.04**
+- **Minimalist** design with **essential** tools and utilities
+- Optimized for **performance** and **size**
+- Includes `syslog-ng` and `logrotate` for **logging**
+- Configured with **secure** defaults
 
 ![Divider](/.design/divider.png)
 
@@ -44,57 +44,19 @@ ENV LC_ALL="en_US.UTF-8"
 
 ## Logging
 
-Micro uses `syslog-ng` for logging. The configuration is optimized for Docker environments, ensuring logs are properly managed and rotated.
+Micro uses `syslog-ng` for logging combined with `logrotate`. The configuration is optimized for Docker environments, ensuring logs are properly managed and rotated.
 
-![Divider](/.design/divider.png)
+### Syslog-ng
 
-### Syslog-ng Configuration
+`syslog-ng` configuration can be found in [syslog-ng.conf](/container/services/syslog-ng/syslog-ng.conf).
 
-Syslog-ng is configured with the following options:
+### Logrotate
 
-```
-@include "scl.conf"
-options {
-    chain_hostnames(off);
-    flush_lines(0);
-    use_dns(no);
-    use_fqdn(no);
-    dns_cache(no);
-    owner("root");
-    group("adm");
-    perm(0640);
-    stats(freq(0));
-    bad_hostname("^gconfd$");
-};
+`logrotate` configuration can be found in [logrotate.conf](/container/services/syslog-ng/logrotate). Current configuration:
 
-source s_src {
-    unix-dgram("/dev/log");
-    internal();
-};
-
-destination d_syslog { file("/var/log/syslog"); };
-log { source(s_src); destination(d_syslog); };
-```
-
-![Divider](/.design/divider.png)
-
-### Logrotate Configuration
-
-Micro includes `logrotate` to manage log file sizes and ensure logs are rotated regularly.
-
-```conf
-# Rotate log files weekly
-weekly
-
-# Keep 4 weeks of backlogs
-rotate 4
-
-# Create new log files after rotating old ones
-create
-
-# Include package-specific logrotate configurations
-include /etc/logrotate.d
-```
+- Rotates logs **weekly**
+- Keeps **4 weeks** of backlogs
+- **Creates** new logs after rotating old ones
 
 ![Divider](/.design/divider.png)
 
