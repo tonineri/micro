@@ -50,7 +50,7 @@ Micro uses `syslog-ng` for logging. The configuration is optimized for Docker en
 
 Syslog-ng is configured with the following options:
 
-```conf
+```
 @include "scl.conf"
 options {
     chain_hostnames(off);
