@@ -1,6 +1,8 @@
-# Micro
-
 ![micro](/.design/logo.png)
+
+![Divider](/.design/divider.png)
+
+## Description
 
 Micro is a minimalist and optimized Docker base image built on `Ubuntu 24.04`. It is designed to be lightweight and efficient, providing a solid foundation for building your own containerized applications.
 
