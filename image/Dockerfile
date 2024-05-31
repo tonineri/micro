@@ -10,6 +10,7 @@ ENV DEBIAN_FRONTEND="noninteractive" \
 
 # Copy resources
 COPY container /container
+RUN find /container -type f -name "*.sh" -exec chmod +x {} \;
 
 # Build
 RUN /container/prerequirements.sh && \
