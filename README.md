@@ -1,43 +1,39 @@
+<div align="center">
+
 ![micro](/.design/logo.png)
+
+# `Tiny But Mighty` 📦
+
+</div>
 
 ![Divider](/.design/divider.png)
 
 ## Description
 
-Micro is a minimalist and optimized Docker base image built on `Ubuntu 24.04`. It is designed to be lightweight and efficient, providing a solid foundation for building your own containerized applications.
+**micro** is a minimalist and optimized Docker base image built on `Ubuntu 24.04`. It is designed to be lightweight and efficient, providing a solid foundation for building your own containerized applications.
 
 ![Divider](/.design/divider.png)
 
 ## Features
 
-- Based on **Ubuntu 24.04**
-- **Minimalist** design with **essential** tools and utilities
-- Optimized for **performance** and **size**
-- Includes `syslog-ng` and `logrotate` for **logging**
-- Configured with **secure** defaults
+**micro** includes only the essential components needed for a streamlined, efficient Docker base image:
+
+- Based on `Ubuntu 24.04 LTS` as the base system 🐧
+- A correct `init` process 🏁
+- Fixes for `apt` incompatibilities with Docker 🔧
+- Logging with`syslog-ng` and `logrotate` 📜
+- Scheduled tasks with `cron`⏰
+- Service supervision and management with `runit` 👷
 
 ![Divider](/.design/divider.png)
 
 ## Getting Started
 
-To use the Micro base image, you can pull it from Docker Hub and use it as the base for your own Dockerfiles.
+To use the **micro** base image, you can pull it from Docker Hub and use it as the base for your own Dockerfiles.
 
 ```dockerfile
 FROM antonioneri/micro:latest
 # Add your application setup here
-```
-
-![Divider](/.design/divider.png)
-
-## Environment Variables
-
-Micro provides the following environment variables for configuration:
-
-```sh
-ENV DEBIAN_FRONTEND="noninteractive"
-ENV LANG="en_US.UTF-8"
-ENV LANGUAGE="en_US:en"
-ENV LC_ALL="en_US.UTF-8"
 ```
 
 ![Divider](/.design/divider.png)
