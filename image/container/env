@@ -6,8 +6,12 @@ export DEBIAN_FRONTEND=noninteractive
 export DISABLE_SYSLOG=${DISABLE_SYSLOG:-0}
 export DISABLE_CRON=${DISABLE_CRON:-0}
 
-# Aliases
-alias mini-apt-install="apt-get install -y --no-install-recommends --no-install-suggests"
+# Functions
+mini_apt_install() {
+    apt-get install -y --no-install-recommends --no-install-suggests "$@"
+}
+
+# Aliases (for interactive shell use)
 alias vim="vim.tiny"
 alias ll="ls -la"
 alias bat="batcat"
