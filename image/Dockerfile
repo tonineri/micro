@@ -15,6 +15,7 @@ COPY container /container
 RUN /container/prerequirements.sh && \
     /container/services.sh && \
     /container/utilities.sh && \
-    /container/cleanup.sh
-
+    /container/cleanup.sh && \
+    rm -f /container/cleanup.sh
+    
 CMD ["/sbin/minit"]

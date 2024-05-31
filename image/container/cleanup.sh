@@ -5,8 +5,11 @@ source /container/env
 # Clean apt cache
 apt-get clean
 
-# Remove unnecessary files from /container, excluding specific files
-find /container/ -not -name 'container' -and -not -name 'env' -and -not -name 'cleanup.sh' -delete
+# Delete everything in /container apart from `env` and `cleanup.sh`
+find /container/ -mindepth 1 \
+    ! -name 'env' \
+    ! -name 'cleanup.sh' \
+    -exec rm -rf {} +
 
 # Remove temporary files
 rm -rf /tmp/* /var/tmp/*
