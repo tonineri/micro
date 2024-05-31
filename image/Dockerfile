@@ -14,7 +14,7 @@ COPY container /container
 # Build
 RUN /container/prerequirements.sh && \
     /container/services.sh && \
-    /container/utilities.sh && \
+    /container/packages.sh && \
     /container/cleanup.sh && \
     rm -f /container/cleanup.sh
     
